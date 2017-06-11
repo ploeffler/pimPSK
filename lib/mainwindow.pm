@@ -1,20 +1,25 @@
-package pimPSK::App::rxtab;
+package pimPSK::App::mainwindow;
 use strict; 
 use warnings; 
 use Wx qw(:everything); 
-use base 'Wx::Frame'; 
-use Wx::Event qw(EVT_MOTION); 
+sub addcontent {
 
 
-sub RXControls { 
-    my ( $self ) = @_; 
+ my ( $self ) = @_; 
  
 # Create a panel to place all of the controls on     
-    my $panel= Wx::Panel->new($self, wxID_ANY, wxDefaultPosition, wxDefaultSize); 
-     
-# pg86----- Plain Button     
-    my $button = Wx::Button->new($panel, wxID_OK, "SEND BSR", 
-             Wx::Point->new(10, 10), wxDefaultSize); 
+    my $panel= Wx::Panel->new($self, wxID_ANY, wxDefaultPosition, [800,600]); 
+# pg111---- Toggle Button 
+    my $ID_TOGGLEBUTTON = 14; 
+    my $togglebutton = Wx::ToggleButton->new($panel, $ID_TOGGLEBUTTON, "&Connect FLDIGI", 
+               Wx::Point->new(10,10), wxDefaultSize); 
+    $togglebutton->SetValue(0); 
+
+# pg111---- Toggle Button 
+    my $ID_TOGGLEBUTTON2 = 15; 
+    my $togglebutton2 = Wx::ToggleButton->new($panel, $ID_TOGGLEBUTTON2, "&CQ", 
+               Wx::Point->new(10,50), wxDefaultSize); 
+    $togglebutton2->SetValue(0);
      
 # pg89----- Bitmap Button 
     my $bmp1 = Wx::Bitmap->new("print.xpm", wxBITMAP_TYPE_XPM); 
@@ -31,7 +36,7 @@ sub RXControls {
     my $ID_COMBOBOX = 2; 
     my @strings2 = ("Apple", "Orange", "Pear", "Grapefruit"); 
     my $combo = Wx::ComboBox->new($panel, $ID_COMBOBOX, "Apple", 
-            Wx::Point->new(10,50), wxDefaultSize, \@strings2, wxCB_DROPDOWN); 
+            Wx::Point->new(150,50), wxDefaultSize, \@strings2, wxCB_DROPDOWN); 
              
 # pg94----- CheckBox Control 
     my $ID_CHECKBOX = 3; 
@@ -142,9 +147,15 @@ sub RXControls {
     my $ID_STATICBOX = 19; 
     my $staticbox = Wx::StaticBox->new($panel, $ID_STATICBOX, 
             "&Static Box", 
-            Wx::Point->new(350, 10), Wx::Size->new(320, 240)); 
-return $self;            
-} 
+            Wx::Point->new(350, 10), Wx::Size->new(100, 100)); 
+return $self;  
+
+
+
+
+
+
+}
 
 
 1;

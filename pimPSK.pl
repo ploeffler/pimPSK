@@ -16,7 +16,8 @@ require lib::functiontabs;
 require lib::txtab;
 require lib::rxtab;
 require lib::networktab;
-
+require lib::pimpskfunctions;
+require lib::mainwindow;
 $| = 1; 
  
 # create the WxApplication 
@@ -31,11 +32,13 @@ use base 'Wx::App';
 
  
 sub OnInit { 
-    #my $frame = pimPSK::App::Frame->new; 
+	pimPSK::App::pimpskfunctions->init();
+    #my $frame = pimPSK::App::Frame->new;
+    
     #$frame->Show(1); 
     my $functionsframe = pimPSK::App::Frame->new;
     pimPSK::App::functionstabs::mdiChildFrame($functionsframe);
-    
+    pimPSK::App::mainwindow::addcontent($functionsframe);
     $functionsframe->Show(1);
 } 
  
@@ -44,6 +47,7 @@ use strict;
 use warnings; 
 use Wx qw(:everything); 
 use base 'Wx::Frame'; 
+use Wx qw(:everything);
 use Wx::Event qw(EVT_MOTION); 
  
 sub new { 
@@ -58,14 +62,26 @@ sub new {
     my $cutIcon = Wx::Icon->new( "cut.xpm", wxBITMAP_TYPE_XPM, -1, -1); 
     $self->SetIcon($cutIcon); 
  
-    my $fileMenu = Wx::Menu->new(); 
+    my $fileMenu = Wx::Menu->new();
+    my $fldigiMenu = Wx::Menu->new(); 
     my $helpMenu = Wx::Menu->new(); 
-     
+    
+    my $fldigisettings_autoconnectmenu = Wx::Menu->new();
+    # pg94----- CheckBox Control
+	my $ID_CHECKBOX = 3;
+#	my $checkBox = Wx::CheckBox->new($class, $ID_CHECKBOX, "&Autoconnect",Wx::Point->new(10,200), wxDefaultSize);
+		       
+#	$checkBox->SetValue(1);
+#    $fldigisettings_autoconnectmenu->AppendItem($checkBox);
+    $fldigiMenu->AppendSubMenu($fldigisettings_autoconnectmenu,"Auto&connect" );
+    
     $fileMenu->Append(wxID_EXIT, "E&xit\tAlt-X", "Quit This Program");
+    
     $helpMenu->Append(wxID_ABOUT, "&About...\tF1", "Show About Dialog"); 
      
     my $menuBar = Wx::MenuBar->new(); 
     $menuBar->Append($fileMenu, "&File"); 
+    $menuBar->Append($fldigiMenu, "F&LDIGI");
     $menuBar->Append($helpMenu, "&Help"); 
      
     $self->SetMenuBar($menuBar); 

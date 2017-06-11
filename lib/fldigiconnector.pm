@@ -9,4 +9,9 @@ sub new {
     my $self = XML::RPC->new('http://localhost:7362/');
     return $self;  
     }
+ sub getversion {
+ my ($class) = @_; 
+ my $self = $class->call('fldigi.name_version');
+ return $self;
+ }
 1;
