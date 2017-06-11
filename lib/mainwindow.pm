@@ -14,8 +14,8 @@ sub addcontent {
     my $panel= Wx::Panel->new($self, 100, wxDefaultPosition, [800,600]); 
 # pg111---- Toggle Button 
     my $ID_TOGGLEBUTTON1 = 14; 
-    my $togglebutton = pimPSK::App::mainwindow::connectbutton->new($panel); 
-    $togglebutton->SetValue(0); 
+    pimPSK::App::mainwindow::connectbutton->new($panel); 
+     
 
 # pg111---- Toggle Button 
     my $ID_TOGGLEBUTTON2 = 15; 
