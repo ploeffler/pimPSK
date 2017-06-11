@@ -2,17 +2,19 @@ package pimPSK::App::mainwindow;
 use strict; 
 use warnings; 
 use Wx qw(:everything); 
+
+require lib::connectbutton;
+
 sub addcontent {
 
 
  my ( $self ) = @_; 
  
 # Create a panel to place all of the controls on     
-    my $panel= Wx::Panel->new($self, wxID_ANY, wxDefaultPosition, [800,600]); 
+    my $panel= Wx::Panel->new($self, 100, wxDefaultPosition, [800,600]); 
 # pg111---- Toggle Button 
-    my $ID_TOGGLEBUTTON = 14; 
-    my $togglebutton = Wx::ToggleButton->new($panel, $ID_TOGGLEBUTTON, "&Connect FLDIGI", 
-               Wx::Point->new(10,10), wxDefaultSize); 
+    my $ID_TOGGLEBUTTON1 = 14; 
+    my $togglebutton = pimPSK::App::mainwindow::connectbutton->new($panel); 
     $togglebutton->SetValue(0); 
 
 # pg111---- Toggle Button 
@@ -34,7 +36,7 @@ sub addcontent {
  
 # pg92----- ComboBox Control 
     my $ID_COMBOBOX = 2; 
-    my @strings2 = ("Apple", "Orange", "Pear", "Grapefruit"); 
+    my @strings2 = ("5m", "10m", "30m", "60m"); 
     my $combo = Wx::ComboBox->new($panel, $ID_COMBOBOX, "Apple", 
             Wx::Point->new(150,50), wxDefaultSize, \@strings2, wxCB_DROPDOWN); 
              

@@ -6,5 +6,8 @@ sub init {
 
 }
 
+sub test {
+
+}
 
 1;
