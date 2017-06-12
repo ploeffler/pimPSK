@@ -18,6 +18,7 @@ require lib::rxtab;
 require lib::networktab;
 require lib::pimpskfunctions;
 require lib::mainwindow;
+
 $| = 1; 
  
 # create the WxApplication 
@@ -29,7 +30,8 @@ package pimPSK::App;
 use strict; 
 use warnings; 
 use base 'Wx::App'; 
-
+use Wx::XRC;
+#use Wx::DC;
  
 sub OnInit { 
 	pimPSK::App::pimpskfunctions->init();
@@ -67,12 +69,12 @@ sub new {
     my $helpMenu = Wx::Menu->new(); 
     
     my $fldigisettings_autoconnectmenu = Wx::Menu->new();
-    # pg94----- CheckBox Control
-	my $ID_CHECKBOX = 3;
-#	my $checkBox = Wx::CheckBox->new($class, $ID_CHECKBOX, "&Autoconnect",Wx::Point->new(10,200), wxDefaultSize);
+#    # pg94----- CheckBox Control
+#	my $ID_CHECKBOX = 3;
+ #   my $checkBox = Wx::CheckBox->new($class, $ID_CHECKBOX, "&Autoconnect",Wx::Point->new(10,200), wxDefaultSize);
 		       
 #	$checkBox->SetValue(1);
-#    $fldigisettings_autoconnectmenu->AppendItem($checkBox);
+#    $fldigisettings_autoconnectmenu->Append($checkBox);
     $fldigiMenu->AppendSubMenu($fldigisettings_autoconnectmenu,"Auto&connect" );
     
     $fileMenu->Append(wxID_EXIT, "E&xit\tAlt-X", "Quit This Program");

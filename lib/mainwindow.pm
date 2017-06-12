@@ -14,8 +14,16 @@ sub addcontent {
     my $panel= Wx::Panel->new($self, 100, wxDefaultPosition, [800,600]); 
 # pg111---- Toggle Button 
     my $ID_TOGGLEBUTTON1 = 14; 
-    pimPSK::App::mainwindow::connectbutton->new($panel); 
-     
+     my $togglebutton1 = Wx::ToggleButton->new($panel, $ID_TOGGLEBUTTON1, "Connect FLDIGI", 
+               Wx::Point->new(10,10), wxDefaultSize); 
+    $togglebutton1->SetValue(0); 
+    $togglebutton1 = pimPSK::App::mainwindow::connectbutton->init($togglebutton1);
+	pimPSK::App::mainwindow::connectbutton::EVT_BUTTON( $self, $togglebutton1, \&OnClick );
+
+# pg94----- CheckBox Control 
+    my $ID_CHECKBOX = 3; 
+    my $checkBox = Wx::CheckBox->new($panel, $ID_CHECKBOX, "Disonnected", Wx::Point->new(130,10), wxDefaultSize); 
+    $checkBox->SetValue(0);     
 
 # pg111---- Toggle Button 
     my $ID_TOGGLEBUTTON2 = 15; 
@@ -23,27 +31,16 @@ sub addcontent {
                Wx::Point->new(10,50), wxDefaultSize); 
     $togglebutton2->SetValue(0);
      
-# pg89----- Bitmap Button 
-    my $bmp1 = Wx::Bitmap->new("print.xpm", wxBITMAP_TYPE_XPM); 
-    my $picButton = Wx::BitmapButton->new($panel, wxID_OK, $bmp1, 
-            Wx::Point->new(150, 10), wxDefaultSize, wxBU_AUTODRAW); 
+    
               
-# pg91----- Choice Control 
-    my $ID_CHOICEBOX = 1; 
-    my @strings1 = ("One", "Two", "Three", "Four", "Five"); 
-    my $choice = Wx::Choice->new($panel, $ID_CHOICEBOX, 
-             Wx::Point->new(250, 10), wxDefaultSize, \@strings1); 
+    my $ID_RADIOBOX = 6; 
+    my @strings5 = ("off", "5m", "10m", "30m", "60m","90m"); 
+    my $radiobox = Wx::RadioBox->new($panel, $ID_RADIOBOX, "Auto CQ",
+               Wx::Point->new(130,30), wxDefaultSize, \@strings5, 
+               3, wxRA_SPECIFY_COLS);
  
-# pg92----- ComboBox Control 
-    my $ID_COMBOBOX = 2; 
-    my @strings2 = ("5m", "10m", "30m", "60m"); 
-    my $combo = Wx::ComboBox->new($panel, $ID_COMBOBOX, "Apple", 
-            Wx::Point->new(150,50), wxDefaultSize, \@strings2, wxCB_DROPDOWN); 
-             
-# pg94----- CheckBox Control 
-    my $ID_CHECKBOX = 3; 
-    my $checkBox = Wx::CheckBox->new($panel, $ID_CHECKBOX, "&Check Me", Wx::Point->new(10,200), wxDefaultSize); 
-    $checkBox->SetValue(1); 
+         
+ 
      
 # pg95----- ListBox Control 
     my $ID_LISTBOX = 4; 
@@ -60,14 +57,7 @@ sub addcontent {
     my $checklistbox = Wx::CheckListBox->new($panel, $ID_CHECKLISTBOX, 
                    Wx::Point->new(200,300), Wx::Size->new(180,80), 
                    \@strings4, wxLB_SINGLE); 
- 
-# pg99----- RadioBox Control 
-    my $ID_RADIOBOX = 6; 
-    my @strings5 = ("&One", "&Two", "T&hree", "&Four", "F&ive","&Six"); 
-    my $radiobox = Wx::RadioBox->new($panel, $ID_RADIOBOX, "RadioBox",
-
-               Wx::Point->new(10,300), wxDefaultSize, \@strings5, 
-               3, wxRA_SPECIFY_COLS); 
+  
  
 # pg101---- Radio Button Control (Spacing forced for display purposes +- Sizers want to use whole window) 
     my $ID_RADIOBUTTON1 = 7; 
